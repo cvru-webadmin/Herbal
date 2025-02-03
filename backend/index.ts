@@ -16,7 +16,7 @@ import { addHerbs } from "./controllers/herbs.controller";
   app.use(express.static("public"));
 
   const allowedOrigins = process.env.CORS_ORIGIN?.split(",") || [];
-  app.use((_, res) => {
+  app.use((_, res, next) => {
     res.setHeader(
       "Access-Control-Allow-Origin",
       "https://herbal-henna.vercel.app"
@@ -27,6 +27,7 @@ import { addHerbs } from "./controllers/herbs.controller";
       "Content-Type, Authorization"
     );
     res.setHeader("Access-Control-Allow-Credentials", "true"); // If you are using cookies or sessions
+    next();
   });
   app.use(
     cors({
