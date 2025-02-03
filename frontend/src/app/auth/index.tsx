@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useLogin } from "../../api/auth.api";
 
 const IndexPage = () => {
