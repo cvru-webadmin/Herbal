@@ -39,7 +39,7 @@ const IndexPage = () => {
             <button className="px-5 py-1 bg-black text-white font-bold rounded-lg text-lg">
               Login
             </button>
-            <Link to="/pass" className="text-blue-500 underline">Update Password</Link>
+            {/* <Link to="/pass" className="text-blue-500 underline">Update Password</Link> */}
           </div>
         </form>
       </div>

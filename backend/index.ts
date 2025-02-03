@@ -15,9 +15,16 @@ import { addHerbs } from "./controllers/herbs.controller";
   app.use(express.json());
   app.use(express.static("public"));
 
+  const allowedOrigins = process.env.CORS_ORIGIN?.split(",") || [];
   app.use(
     cors({
-      origin: "http://192.168.1.20:5173",
+      origin: function (origin, callback) {
+        if (origin && allowedOrigins.indexOf(origin) !== -1) {
+          callback(null, true);
+        } else {
+          callback(new Error("Not allowed by CORS"));
+        }
+      },
       credentials: true,
     })
   );
