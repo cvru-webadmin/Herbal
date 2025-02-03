@@ -22,7 +22,7 @@ import { addHerbs } from "./controllers/herbs.controller";
         if (origin && allowedOrigins.indexOf(origin) !== -1) {
           callback(null, true);
         } else {
-          callback(null, true);
+          callback(new Error("Not allowed by CORS"));
         }
       },
       credentials: true,
