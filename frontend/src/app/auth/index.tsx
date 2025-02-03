@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useLogin } from "../../api/auth.api";
 
 const IndexPage = () => {
@@ -34,9 +35,12 @@ const IndexPage = () => {
               className="px-2 py-1 border-[1px] rounded-lg w-full"
             />
           </div>
-          <button className="px-5 py-1 bg-black text-white font-bold rounded-lg text-lg">
-            Login
-          </button>
+          <div className="flex justify-between items-center"> 
+            <button className="px-5 py-1 bg-black text-white font-bold rounded-lg text-lg">
+              Login
+            </button>
+            <Link to="/pass" className="text-blue-500 underline">Update Password</Link>
+          </div>
         </form>
       </div>
     </div>

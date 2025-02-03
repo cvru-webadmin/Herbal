@@ -58,3 +58,38 @@ export const fetchUser = async (req: Request, res: Response) => {
     );
   }
 };
+
+export const updatePassword = async (req: Request, res: Response) => {
+  const { password, newPassword } = req.body as {
+    password: string;
+    newPassword: string;
+  };
+  if (req.session.userSession) {
+    const user = await User.findById(req.session.userSession);
+    if (!user)
+      throw new ApiError(
+        404,
+        "Wrong credentials",
+        "Wrong email or password please try again!"
+      );
+
+    if (user.password !== password) {
+      throw new ApiError(
+        404,
+        "Wrong credentials",
+        "Wrong email or password please try again!"
+      );
+    }
+
+    user.password = newPassword;
+    await user.save();
+    req.session.userSession = user.id;
+    res.status(200).json({ message: "Password updated successfully!" });
+  } else {
+    throw new ApiError(
+      401,
+      "Please loging first",
+      "You are not authenticated. Please login first!"
+    );
+  }
+};

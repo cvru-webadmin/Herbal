@@ -21,6 +21,9 @@ const Navbar = () => {
             <li>
               <Link to="/add">Add Herbs</Link>
             </li>
+            <li>
+              <Link to="/pass">Change Password</Link>
+            </li>
           </ul>
         </nav>
       </div>

@@ -113,3 +113,39 @@ export const useLogout = () => {
     },
   });
 };
+
+const changePassword = async (params: {
+  password: string;
+  newPassword: string;
+}) => {
+  const response = await apiInstance.post("/auth/updatePassword", params);
+  return response.data;
+};
+
+export const useChangePassword = () => {
+  return useMutation({
+    mutationFn: changePassword,
+    mutationKey: ["auth_change_password"],
+    retry: false,
+    onSuccess: () => {
+      toast("Success", {
+        type: "success",
+      });
+    },
+    onError: ({ response }: AxiosError) => {
+      if (!response) {
+        toast("Something went wrong", {
+          type: "error",
+        });
+        return 0;
+      }
+
+      const data = response.data as { name: string; message: string };
+      if (data) {
+        toast(data.message, {
+          type: "warning",
+        });
+      }
+    },
+  });
+};
