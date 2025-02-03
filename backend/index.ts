@@ -16,6 +16,18 @@ import { addHerbs } from "./controllers/herbs.controller";
   app.use(express.static("public"));
 
   const allowedOrigins = process.env.CORS_ORIGIN?.split(",") || [];
+  app.use((_, res) => {
+    res.setHeader(
+      "Access-Control-Allow-Origin",
+      "https://herbal-henna.vercel.app"
+    );
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "Content-Type, Authorization"
+    );
+    res.setHeader("Access-Control-Allow-Credentials", "true"); // If you are using cookies or sessions
+  });
   app.use(
     cors({
       origin: function (origin, callback) {
@@ -35,19 +47,6 @@ import { addHerbs } from "./controllers/herbs.controller";
       exposedHeaders: ["Set-Cookie"],
     })
   );
-
-  app.use((_, res) => {
-    res.setHeader(
-      "Access-Control-Allow-Origin",
-      "https://herbal-henna.vercel.app"
-    );
-    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-    res.setHeader(
-      "Access-Control-Allow-Headers",
-      "Content-Type, Authorization"
-    );
-    res.setHeader("Access-Control-Allow-Credentials", "true"); // If you are using cookies or sessions
-  });
 
   app.use(
     session({
