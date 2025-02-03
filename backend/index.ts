@@ -26,6 +26,9 @@ import { addHerbs } from "./controllers/herbs.controller";
         }
       },
       credentials: true,
+      methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
+      allowedHeaders: ["Content-Type", "Authorization", "Access-Control-Allow-Origin"],
+      exposedHeaders: ["Set-Cookie"],
     })
   );
 
