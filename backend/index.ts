@@ -27,10 +27,27 @@ import { addHerbs } from "./controllers/herbs.controller";
       },
       credentials: true,
       methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
-      allowedHeaders: ["Content-Type", "Authorization", "Access-Control-Allow-Origin"],
+      allowedHeaders: [
+        "Content-Type",
+        "Authorization",
+        "Access-Control-Allow-Origin",
+      ],
       exposedHeaders: ["Set-Cookie"],
     })
   );
+
+  app.use((_, res) => {
+    res.setHeader(
+      "Access-Control-Allow-Origin",
+      "https://herbal-henna.vercel.app"
+    );
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "Content-Type, Authorization"
+    );
+    res.setHeader("Access-Control-Allow-Credentials", "true"); // If you are using cookies or sessions
+  });
 
   app.use(
     session({
