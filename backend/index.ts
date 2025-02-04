@@ -19,7 +19,7 @@ import { addHerbs } from "./controllers/herbs.controller";
   app.use((_, res, next) => {
     res.setHeader(
       "Access-Control-Allow-Origin",
-      "https://herbal-henna.vercel.app"
+      "https://chhaigaonudyami.com"
     );
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
     res.setHeader(
