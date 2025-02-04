@@ -17,7 +17,7 @@ import MongoStore from "connect-mongo";
   app.use(express.static("public"));
 
   const allowedOrigins = process.env.CORS_ORIGIN?.split(",") || [];
-  app.use((_, res, next) => {
+  /*app.use((_, res, next) => {
     res.setHeader(
       "Access-Control-Allow-Origin",
       "https://chhaigaonudyami.com"
@@ -29,7 +29,7 @@ import MongoStore from "connect-mongo";
     );
     res.setHeader("Access-Control-Allow-Credentials", "true"); // If you are using cookies or sessions
     next();
-  });
+  });*/
   app.use(
     cors({
       origin: function (origin, callback) {
@@ -56,7 +56,7 @@ import MongoStore from "connect-mongo";
       resave: false,
       saveUninitialized: false,
       store: new MongoStore({
-        mongoUrl: process.env.MONGO_URI,
+        mongoUrl: `${process.env.MONGO_URI}/${process.env.DB_NAME}?authSource=${process.env.DB_AUTH_SOURCE}`,
         collectionName: "sessions",
         autoRemove: "native",
         ttl: 86400000,
