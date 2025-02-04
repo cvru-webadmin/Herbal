@@ -7,6 +7,7 @@ import herbsRoute from "./routes/herbs.routes";
 import { fileUpload } from "./middleware/multer";
 import asyncHandler from "./utility/asyncHandler";
 import { addHerbs } from "./controllers/herbs.controller";
+import MongoStore from "connect-mongo";
 
 (async () => {
   await connectDb();
@@ -54,6 +55,12 @@ import { addHerbs } from "./controllers/herbs.controller";
       secret: process.env.SESSION_SECRET_KEY || "Express Secret",
       resave: false,
       saveUninitialized: false,
+      store: new MongoStore({
+        mongoUrl: process.env.MONGO_URI,
+        collectionName: "sessions",
+        autoRemove: "native",
+        ttl: 86400000,
+      }),
       cookie: {
         maxAge: 86400000,
         sameSite: "strict",
