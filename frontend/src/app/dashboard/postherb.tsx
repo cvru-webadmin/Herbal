@@ -156,134 +156,150 @@ const PostHerb = () => {
           herbData={herb}
           otherData={formValues}
           onClose={() => setPreview(false)}
-          thumbnailPreview={typeof formValues.thumbnail === "string"
-            ? formValues.thumbnail
-            : thumbnailPreview}
+          thumbnailPreview={
+            typeof formValues.thumbnail === "string"
+              ? formValues.thumbnail
+              : thumbnailPreview
+          }
         />
       )}
-
-      <div className="space-y-6">
-        {/* Thumbnail Upload */}
-        <div>
-          <div
-            className="aspect-video rounded-lg w-[300px] bg-center bg-cover cursor-pointer overflow-hidden bg-gray-500"
-            style={{
-              backgroundImage: `url(${
-                // @ts-ignore
-                typeof formValues.thumbnail === "string"
-                  ? formValues.thumbnail
-                  : thumbnailPreview
-              })`,
-            }}
-          ></div>
-          <div
-            className="bg-gray-500 w-fit px-5 rounded-lg py-3 text-white font-bold flex gap-3 items-center justify-center cursor-pointer mt-5"
-            onClick={() => imgRef.current?.click()}
-          >
-            Upload Image <CloudUpload size={25} />
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          setPreview(true);
+        }}
+      >
+        <div className="space-y-6">
+          {/* Thumbnail Upload */}
+          <div>
+            <div
+              className="aspect-video rounded-lg w-[300px] bg-center bg-cover cursor-pointer overflow-hidden bg-gray-500"
+              style={{
+                backgroundImage: `url(${
+                  // @ts-ignore
+                  typeof formValues.thumbnail === "string"
+                    ? formValues.thumbnail
+                    : thumbnailPreview
+                })`,
+              }}
+            ></div>
+            <div
+              className="bg-gray-500 w-fit px-5 rounded-lg py-3 text-white font-bold flex gap-3 items-center justify-center cursor-pointer mt-5"
+              onClick={() => imgRef.current?.click()}
+            >
+              Upload Image <CloudUpload size={25} />
+            </div>
+            <input
+              type="file"
+              name="thumbnail"
+              id="thumbnail"
+              required
+              hidden
+              ref={imgRef}
+              onChange={handleImageUpload}
+            />
           </div>
-          <input
-            type="file"
-            name="thumbnail"
-            id="thumbnail"
-            hidden
-            ref={imgRef}
-            onChange={handleImageUpload}
-          />
-        </div>
 
-        {/* Macroscopic Characters */}
-        <h2 className="text-xl font-semibold text-gray-800 mb-2">
-          Macroscopic Characters
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input
-            type="text"
-            placeholder="Colour"
-            className="px-2 py-1 border-[1px] rounded-lg focus-visible:outline-0 w-full"
-            value={formValues.macroScopiccharacters.colour}
-            onChange={(e) =>
-              handleInputChange(e, "macroScopiccharacters", "colour")
-            }
-          />
-          <input
-            type="text"
-            placeholder="Stems"
-            className="px-2 py-1 border-[1px] rounded-lg focus-visible:outline-0 w-full"
-            value={formValues.macroScopiccharacters.stems}
-            onChange={(e) =>
-              handleInputChange(e, "macroScopiccharacters", "stems")
-            }
-          />
-          <input
-            type="text"
-            placeholder="Odour"
-            className="px-2 py-1 border-[1px] rounded-lg focus-visible:outline-0 w-full"
-            value={formValues.macroScopiccharacters.odour}
-            onChange={(e) =>
-              handleInputChange(e, "macroScopiccharacters", "odour")
-            }
-          />
-          <input
-            type="text"
-            placeholder="Taste"
-            className="px-2 py-1 border-[1px] rounded-lg focus-visible:outline-0 w-full"
-            value={formValues.macroScopiccharacters.taste}
-            onChange={(e) =>
-              handleInputChange(e, "macroScopiccharacters", "taste")
-            }
-          />
-          <input
-            type="text"
-            placeholder="Size"
-            className="px-2 py-1 border-[1px] rounded-lg focus-visible:outline-0 w-full"
-            value={formValues.macroScopiccharacters.size}
-            onChange={(e) =>
-              handleInputChange(e, "macroScopiccharacters", "size")
-            }
-          />
-          <input
-            type="text"
-            placeholder="Shape"
-            className="px-2 py-1 border-[1px] rounded-lg focus-visible:outline-0 w-full"
-            value={formValues.macroScopiccharacters.shape}
-            onChange={(e) =>
-              handleInputChange(e, "macroScopiccharacters", "shape")
-            }
-          />
-        </div>
+          {/* Macroscopic Characters */}
+          <h2 className="text-xl font-semibold text-gray-800 mb-2">
+            Macroscopic Characters
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <input
+              type="text"
+              placeholder="Colour"
+              required
+              className="px-2 py-1 border-[1px] rounded-lg focus-visible:outline-0 w-full"
+              value={formValues.macroScopiccharacters.colour}
+              onChange={(e) =>
+                handleInputChange(e, "macroScopiccharacters", "colour")
+              }
+            />
+            <input
+              type="text"
+              placeholder="Stems"
+              required
+              className="px-2 py-1 border-[1px] rounded-lg focus-visible:outline-0 w-full"
+              value={formValues.macroScopiccharacters.stems}
+              onChange={(e) =>
+                handleInputChange(e, "macroScopiccharacters", "stems")
+              }
+            />
+            <input
+              type="text"
+              placeholder="Odour"
+              required
+              className="px-2 py-1 border-[1px] rounded-lg focus-visible:outline-0 w-full"
+              value={formValues.macroScopiccharacters.odour}
+              onChange={(e) =>
+                handleInputChange(e, "macroScopiccharacters", "odour")
+              }
+            />
+            <input
+              type="text"
+              placeholder="Taste"
+              required
+              className="px-2 py-1 border-[1px] rounded-lg focus-visible:outline-0 w-full"
+              value={formValues.macroScopiccharacters.taste}
+              onChange={(e) =>
+                handleInputChange(e, "macroScopiccharacters", "taste")
+              }
+            />
+            <input
+              type="text"
+              placeholder="Size"
+              required
+              className="px-2 py-1 border-[1px] rounded-lg focus-visible:outline-0 w-full"
+              value={formValues.macroScopiccharacters.size}
+              onChange={(e) =>
+                handleInputChange(e, "macroScopiccharacters", "size")
+              }
+            />
+            <input
+              type="text"
+              placeholder="Shape"
+              required
+              className="px-2 py-1 border-[1px] rounded-lg focus-visible:outline-0 w-full"
+              value={formValues.macroScopiccharacters.shape}
+              onChange={(e) =>
+                handleInputChange(e, "macroScopiccharacters", "shape")
+              }
+            />
+          </div>
 
-        {/* Other Details */}
-        <h2 className="text-xl font-semibold text-gray-800 mb-2">
-          Other Details
-        </h2>
-        <textarea
-          placeholder="Other Details"
-          className="px-2 py-1 border-[1px] rounded-lg focus-visible:outline-0 w-full"
-          rows={4}
-          value={formValues.otherDetails}
-          onChange={(e) => handleInputChange(e, "otherDetails")}
-        ></textarea>
+          {/* Other Details */}
+          <h2 className="text-xl font-semibold text-gray-800 mb-2">
+            Other Details
+          </h2>
+          <textarea
+            placeholder="Other Details"
+            className="px-2 py-1 border-[1px] rounded-lg focus-visible:outline-0 w-full"
+            rows={4}
+            required
+            value={formValues.otherDetails}
+            onChange={(e) => handleInputChange(e, "otherDetails")}
+          ></textarea>
 
-        <div className="space-x-5">
-          <button
-            className="px-4 py-2 bg-green-100 text-green-600 rounded-lg font-semibold hover:bg-green-600 hover:text-white"
-            onClick={() => setPreview(true)}
-          >
-            Preview
-          </button>
-          <button
-            className="px-4 py-2 bg-red-100 text-red-600 rounded-lg font-semibold hover:bg-red-400 hover:text-white"
-            onClick={() => {
-              localStorage.removeItem("otherDetails");
-              localStorage.removeItem("herbs");
-              navigate("/all");
-            }}
-          >
-            Clear Form
-          </button>
+          <div className="space-x-5">
+            <button
+              className="px-4 py-2 bg-green-100 text-green-600 rounded-lg font-semibold hover:bg-green-600 hover:text-white"
+              type="submit"
+            >
+              Preview
+            </button>
+            <button
+              className="px-4 py-2 bg-red-100 text-red-600 rounded-lg font-semibold hover:bg-red-400 hover:text-white"
+              onClick={() => {
+                localStorage.removeItem("otherDetails");
+                localStorage.removeItem("herbs");
+                navigate("/all");
+              }}
+            >
+              Clear Form
+            </button>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 };
