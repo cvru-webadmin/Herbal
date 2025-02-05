@@ -30,6 +30,13 @@ import MongoStore from "connect-mongo";
     res.setHeader("Access-Control-Allow-Credentials", "true"); // If you are using cookies or sessions
     next();
   });*/
+  app.use((_, res, next) => {
+    res.header("Access-Control-Allow-Origin", "https://chhaigaonudyami.com"); // Allow only this origin
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    next();
+  });
+
   app.use(
     cors({
       origin: function (origin, callback) {
